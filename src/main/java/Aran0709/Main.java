@@ -16,7 +16,7 @@ public class Main {
         int classificacaoIndicativa = 0;
         int qtExemplaresCadastrados = 0;
         double valorEstoque = 0.0;
-        int idadeLivro = 0;
+        int idadeLivroEmAnos = 0;
 
         boolean livroCadastrado = false;
 
@@ -40,37 +40,55 @@ public class Main {
             switch(opcao) {
                 case 0:
                     System.out.println("Encerrando o Devlibrary. Até mais!");
+                    break;
 
 
 
                 case 1:
 
                     sc.nextLine();
-                    System.out.println("Digite o nome do livro: ");
-                     nomeLivro = sc.nextLine();
 
-                    System.out.println("Digite o nome do autor:");
-                    autorLivro = sc.nextLine();
+                    do {
+                        System.out.println("Digite o nome do livro: ");
+                        nomeLivro = sc.nextLine();
+                    }while(nomeLivro.isBlank());
 
-                    System.out.println("Digite o ano de publicação:");
-                    anoPublicacaoLivro = sc.nextInt();
 
-                    System.out.println("Digite o preço do livro:");
-                    precoLivro = sc.nextDouble();
+                    do {
+                        System.out.println("Digite o nome do autor:");
+                        autorLivro = sc.nextLine();
+                    }while(autorLivro.isBlank());
 
-                    System.out.println("Qual a quantidade disponivel em estoque:");
-                    quantidadeEstoque = sc.nextInt();
 
-                    System.out.println("Digite a classificação indicativa ");
-                    classificacaoIndicativa = sc.nextInt();
+                    do {
+                        System.out.println("Digite o ano de publicação:");
+                        anoPublicacaoLivro = sc.nextInt();
+                    }while(anoPublicacaoLivro < 1 || anoPublicacaoLivro > 2026);
 
-                    qtExemplaresCadastrados++;
+                    do {
+                        System.out.println("Digite o preço do livro:");
+                        precoLivro = sc.nextDouble();
+                    }while(precoLivro<0);
+
+
+                    do {
+                        System.out.println("Qual a quantidade disponivel em estoque:");
+                        quantidadeEstoque = sc.nextInt();
+                    }while (quantidadeEstoque<0);
+
+                    do {
+                        System.out.println("Digite a classificação indicativa ");
+                        classificacaoIndicativa = sc.nextInt();
+                    }while(classificacaoIndicativa<0 || classificacaoIndicativa != 10 || classificacaoIndicativa != 12
+                            || classificacaoIndicativa != 14 || classificacaoIndicativa != 16 || classificacaoIndicativa != 18);
+
+                    qtExemplaresCadastrados =  quantidadeEstoque;
                     System.out.println("\n\n CADASTRADO COM SUCESSO!\n");
                     livroCadastrado = true;
                     break;
 
                 case 2:
-                    if(livroCadastrado == true) {
+                    if(livroCadastrado) {
                         System.out.printf("O  nome do livro: %s%n", nomeLivro);
                         System.out.printf("O nome do autor: %s%n", autorLivro);
                         System.out.printf("Ano: %d%n", anoPublicacaoLivro);
@@ -85,41 +103,55 @@ public class Main {
 
 
                 case 3:
-                    System.out.println("Vamos calcular o valor do estoque :");
-                    valorEstoque = precoLivro * quantidadeEstoque;
+                    if (livroCadastrado) {
+                        System.out.println("Vamos calcular o valor do estoque :");
+                        valorEstoque = precoLivro * quantidadeEstoque;
 
-                    System.out.printf("O valor do estoque é: R$ %.2f%n",valorEstoque);
+                        System.out.printf("O valor do estoque é: R$ %.2f%n", valorEstoque);
+                    }else{
+                        System.out.println("Nenhum livro cadastrado. ");
+                    };
                     break;
 
 
                 case 4:
 
-                    if(classificacaoIndicativa == 0){
-                        System.out.println("Classificação livre.");
+                    if(livroCadastrado) {
+                        if (classificacaoIndicativa == 0) {
+                            System.out.println("Classificação livre.");
 
-                    }else if(classificacaoIndicativa == 10){
-                        System.out.println("Indecação de faixa etária: não recomendado para menores de 10 anos");
-                    }else if(classificacaoIndicativa == 12){
-                        System.out.println("Indecação de faixa etária: não recomendado para menores de 12 anos");
-                    }else if(classificacaoIndicativa == 14){
-                        System.out.println("Indecação de faixa etária: não recomendado para menores de 14 anos");
-                    }else if(classificacaoIndicativa == 16){
-                        System.out.println("Indecação de faixa etária: não recomendado para menores de 16 anos");
-                    }else if(classificacaoIndicativa == 18){
-                        System.out.println("Indecação de faixa etária: não recomendado para menores de 18 anos");
-                    }else {
-                        System.out.println("CLASSIFICAÇÃO INVALIDA!");
-                    }
+                        } else if (classificacaoIndicativa == 10) {
+                            System.out.println("Indicação de faixa etária: não recomendado para menores de 10 anos");
+                        } else if (classificacaoIndicativa == 12) {
+                            System.out.println("Indicação de faixa etária: não recomendado para menores de 12 anos");
+                        } else if (classificacaoIndicativa == 14) {
+                            System.out.println("Indicação de faixa etária: não recomendado para menores de 14 anos");
+                        } else if (classificacaoIndicativa == 16) {
+                            System.out.println("Indicação de faixa etária: não recomendado para menores de 16 anos");
+                        } else if (classificacaoIndicativa == 18) {
+                            System.out.println("Indicação de faixa etária: não recomendado para menores de 18 anos");
+                        } else {
+                            System.out.println("CLASSIFICAÇÃO INVALIDA!");
+                        }
+                    }else{
+                        System.out.println("Nenhum livro cadastrado.");
+                    };
                     break;
 
 
                 case 5:
-                    System.out.println("Estatísticas:");
-                    valorEstoque = precoLivro * quantidadeEstoque;
-                    System.out.printf("Quantidade de exemplares cadastrados em estoque: %d%n",qtExemplaresCadastrados);
-                    System.out.printf("Valor de estoque: R$ %.2f%n",valorEstoque);
-                    idadeLivro = 2026 - anoPublicacaoLivro;
-                    System.out.printf("Idade do livre em comparação a o ano atual: %d%n",idadeLivro);
+                    if(livroCadastrado) {
+                        System.out.println("Estatísticas:");
+                        valorEstoque = precoLivro * quantidadeEstoque;
+                        System.out.printf("Quantidade de exemplares cadastrados em estoque: %d%n",qtExemplaresCadastrados);
+                        System.out.printf("Valor de estoque: R$ %.2f%n",valorEstoque);
+                        idadeLivroEmAnos = 2026 - anoPublicacaoLivro;
+                        System.out.printf("Idade do livre em comparação a o ano atual: %d%n",idadeLivro);
+                    }else{
+                        System.out.println("Nenhum livro cadastrado.");
+                    }
+
+                    break;
 
 
 
