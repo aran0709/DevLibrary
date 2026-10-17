@@ -79,8 +79,8 @@ public class Main {
                     do {
                         System.out.println("Digite a classificação indicativa ");
                         classificacaoIndicativa = sc.nextInt();
-                    }while(classificacaoIndicativa<0 || classificacaoIndicativa != 10 || classificacaoIndicativa != 12
-                            || classificacaoIndicativa != 14 || classificacaoIndicativa != 16 || classificacaoIndicativa != 18);
+                    }while(classificacaoIndicativa !=0  &&  classificacaoIndicativa != 10 && classificacaoIndicativa != 12
+                            && classificacaoIndicativa != 14 && classificacaoIndicativa != 16 && classificacaoIndicativa != 18);
 
                     qtExemplaresCadastrados =  quantidadeEstoque;
                     System.out.println("\n\n CADASTRADO COM SUCESSO!\n");
@@ -146,7 +146,7 @@ public class Main {
                         System.out.printf("Quantidade de exemplares cadastrados em estoque: %d%n",qtExemplaresCadastrados);
                         System.out.printf("Valor de estoque: R$ %.2f%n",valorEstoque);
                         idadeLivroEmAnos = 2026 - anoPublicacaoLivro;
-                        System.out.printf("Idade do livre em comparação a o ano atual: %d%n",idadeLivro);
+                        System.out.printf("Idade do livre em comparação a o ano atual: %d%n",idadeLivroEmAnos);
                     }else{
                         System.out.println("Nenhum livro cadastrado.");
                     }
