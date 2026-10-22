@@ -61,7 +61,7 @@ public class Livro {
     @Override
     public String toString(){
 
-        return " Livro: " + getNomeLivro() + "\n"+
+        return  "Livro: " + getNomeLivro() + "\n"+
                 "Autor: " + getAutorLivro() + "\n" +
                 "Ano de Lançamento: " + getAnoPublicacaoLivro() + "\n"+
                 "Preço: " + getPrecoLivro() + "\n" +
@@ -69,7 +69,7 @@ public class Livro {
                 "Classificação: " + getClassificacaoIndicativa() + "\n";
     }
 
-    public double calcularEstoque(){
+    public double calcularValorEstoque(){
         return precoLivro * quantidadeEstoque;
     }
 

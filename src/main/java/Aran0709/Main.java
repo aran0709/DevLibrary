@@ -9,12 +9,10 @@ public class Main {
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
 
-        String nomeLivro = "";
-        String autorLivro = "";
-        int anoPublicacaoLivro = 0 ;
-        double precoLivro = 0.0;
-        int quantidadeEstoque = 0;
-        int classificacaoIndicativa = 0;
+
+
+
+
         double valorEstoque = 0.0;
         int idadeLivroEmAnos = 0;
 
@@ -53,47 +51,51 @@ public class Main {
 
                     do {
                         System.out.println("Digite o nome do livro: ");
-                        nomeLivro = sc.nextLine();
-                        livro1.setNomeLivro(nomeLivro);
+                        livro1.setNomeLivro(sc.nextLine());
 
-                    }while(nomeLivro.isBlank());
+
+                    }while(livro1.getNomeLivro().isBlank());
 
 
                     do {
                         System.out.println("Digite o nome do autor:");
-                        autorLivro = sc.nextLine();
-                        livro1.setAutorLivro(autorLivro);
-                    }while(autorLivro.isBlank());
+                        livro1.setAutorLivro(sc.nextLine());
+
+                    }while(livro1.getAutorLivro().isBlank());
 
 
                     do {
                         System.out.println("Digite o ano de publicação:");
-                        anoPublicacaoLivro = sc.nextInt();
+                        livro1.setAnoPublicacaoLivro(sc.nextInt());
 
-                    }while(anoPublicacaoLivro < 1 || anoPublicacaoLivro > java.time.Year.now().getValue());
-                    livro1.setAnoPublicacaoLivro(anoPublicacaoLivro);
+
+
+                    }while(livro1.getAnoPublicacaoLivro() < 1 || livro1.getAnoPublicacaoLivro() > java.time.Year.now().getValue());
+
 
                     do {
                         System.out.println("Digite o preço do livro:");
-                        precoLivro = sc.nextDouble();
+                        livro1.setPrecoLivro(sc.nextDouble());
 
-                    }while(!Double.isFinite(precoLivro) || precoLivro <0);
-                    livro1.setPrecoLivro(precoLivro);
+                    }while(!Double.isFinite(livro1.getPrecoLivro()) || livro1.getPrecoLivro() <0);
+
 
 
                     do {
                         System.out.println("Qual a quantidade disponivel em estoque:");
-                        quantidadeEstoque = sc.nextInt();
-                    }while (quantidadeEstoque<0);
-                    livro1.setQuantidadeEstoque(quantidadeEstoque);
+                        livro1.setQuantidadeEstoque(sc.nextInt());
+
+                    }while (livro1.getQuantidadeEstoque()<0);
+
 
                     do {
                         System.out.println("Digite a classificação indicativa ");
-                        classificacaoIndicativa = sc.nextInt();
+                        livro1.setClassificacaoIndicativa(sc.nextInt());
 
-                    }while(classificacaoIndicativa !=0  &&  classificacaoIndicativa != 10 && classificacaoIndicativa != 12
-                            && classificacaoIndicativa != 14 && classificacaoIndicativa != 16 && classificacaoIndicativa != 18);
-                    livro1.setClassificacaoIndicativa(classificacaoIndicativa);
+
+                    }while(livro1.getClassificacaoIndicativa() !=0  &&  livro1.getClassificacaoIndicativa() != 10 && livro1.getClassificacaoIndicativa() != 12
+                            && livro1.getClassificacaoIndicativa() != 14 && livro1.getClassificacaoIndicativa() != 16 && livro1.getClassificacaoIndicativa() != 18);
+
 
 
                     System.out.println("\n\n CADASTRADO COM SUCESSO!\n");
@@ -113,13 +115,13 @@ public class Main {
                 case 3:
                     if (livroCadastrado) {
                         System.out.println("Vamos calcular o valor do estoque :");
-                        valorEstoque = livro1.calcularEstoque();
+                        valorEstoque = livro1.calcularValorEstoque();
 
 
                         System.out.printf("O valor do estoque é: R$ %.2f%n", valorEstoque);
                     }else{
                         System.out.println("Nenhum livro cadastrado. ");
-                    };
+                    }
                     break;
 
 
@@ -131,7 +133,7 @@ public class Main {
 
                     }else{
                         System.out.println("Nenhum livro cadastrado.");
-                    };
+                    }
 
                     break;
 
@@ -139,7 +141,7 @@ public class Main {
                 case 5:
                     if(livroCadastrado) {
                         System.out.println("Estatísticas:");
-                        valorEstoque = livro1.calcularEstoque();
+                        valorEstoque = livro1.calcularValorEstoque();
                         System.out.printf("Quantidade de exemplares cadastrados em estoque: %d%n",livro1.getQuantidadeEstoque());
                         System.out.printf("Valor de estoque: R$ %.2f%n",valorEstoque);
                         idadeLivroEmAnos = livro1.calcularIdadeLivro();
