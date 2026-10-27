@@ -15,6 +15,11 @@ public class Livro {
     }
 
     public void setNomeLivro(String nomeLivro) {
+        if (nomeLivro == null || nomeLivro.isBlank()) {
+            throw new IllegalArgumentException(
+                    "Valor nulo!"
+            );
+        }
         this.nomeLivro = nomeLivro;
     }
 
@@ -23,6 +28,11 @@ public class Livro {
     }
 
     public void setAutorLivro(String autorLivro) {
+        if(autorLivro == null || autorLivro.isBlank()) {
+            throw new IllegalArgumentException(
+                    "Valor nulo!"
+            );
+        }
         this.autorLivro = autorLivro;
     }
 
@@ -31,6 +41,11 @@ public class Livro {
     }
 
     public void setAnoPublicacaoLivro(int anoPublicacaoLivro) {
+        if(anoPublicacaoLivro > java.time.Year.now().getValue() || anoPublicacaoLivro < 1) {
+            throw new IllegalArgumentException(
+                    "Ano informado maior que o ano atual!"
+            );
+        }
         this.anoPublicacaoLivro = anoPublicacaoLivro;
     }
 
@@ -39,14 +54,23 @@ public class Livro {
     }
 
     public void setPrecoLivro(double precoLivro) {
+        if (!Double.isFinite(precoLivro) || precoLivro < 0  || Double.isNaN(precoLivro)) {
+            throw new IllegalArgumentException(
+                    "Valor invalido !!"
+            );
+        }
         this.precoLivro = precoLivro;
     }
-
     public int getQuantidadeEstoque() {
         return quantidadeEstoque;
     }
 
     public void setQuantidadeEstoque(int quantidadeEstoque) {
+        if(quantidadeEstoque < 0 ) {
+            throw new IllegalArgumentException(
+              "Valor invalido !!"
+            );
+        }
         this.quantidadeEstoque = quantidadeEstoque;
     }
 
@@ -55,6 +79,12 @@ public class Livro {
     }
 
     public void setClassificacaoIndicativa(int classificacaoIndicativa) {
+        if (classificacaoIndicativa  !=0 && classificacaoIndicativa !=10 && classificacaoIndicativa !=12
+        && classificacaoIndicativa != 14 && classificacaoIndicativa !=16 && classificacaoIndicativa !=18) {
+            throw new IllegalArgumentException(
+                    "Valor invalido !!"
+            );
+        }
         this.classificacaoIndicativa = classificacaoIndicativa;
     }
 
@@ -64,7 +94,7 @@ public class Livro {
         return  "Livro: " + getNomeLivro() + "\n"+
                 "Autor: " + getAutorLivro() + "\n" +
                 "Ano de Lançamento: " + getAnoPublicacaoLivro() + "\n"+
-                "Preço: " + getPrecoLivro() + "\n" +
+                "Preço:  " + String.format("%.2f",getPrecoLivro()) + "\n" +
                 "Quantidade: " + getQuantidadeEstoque() + "\n"+
                 "Classificação: " + getClassificacaoIndicativa() + "\n";
     }
@@ -91,6 +121,8 @@ public class Livro {
         }
 
     }
+
+
 
     public int calcularIdadeLivro(){
         return java.time.Year.now().getValue() - anoPublicacaoLivro;
