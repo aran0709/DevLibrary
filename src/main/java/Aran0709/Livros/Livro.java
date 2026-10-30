@@ -15,20 +15,13 @@ public class Livro {
     }
 
     public void setNomeLivro(String nomeLivro) {
-
-    try {
         if (nomeLivro == null || nomeLivro.isBlank()) {
             throw new IllegalArgumentException(
                     "Valor nulo!"
             );
         }
         this.nomeLivro = nomeLivro;
-    } catch (IllegalArgumentException ex) {
-        System.out.println(ex.getMessage());
     }
-    }
-
-
 
     public String getAutorLivro() {
         return autorLivro;
